@@ -1,0 +1,95 @@
+// Skema database awal — Repositori Karya Ilmiah Dosen
+// Lihat PRD.md dan CLAUDE.md untuk konteks lengkap.
+// Detail field masih bisa disesuaikan bersama sebelum development lanjut.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  DOSEN
+}
+
+enum ArticleStatus {
+  PENDING
+  PUBLISHED
+  REJECTED
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         Role      @default(DOSEN)
+  faculty      Faculty?  @relation(fields: [facultyId], references: [id])
+  facultyId    String?
+  articles     Article[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("users")
+}
+
+model Faculty {
+  id       String    @id @default(cuid())
+  name     String    @unique
+  users    User[]
+  articles Article[]
+
+  @@map("faculties")
+}
+
+model Category {
+  id       String            @id @default(cuid())
+  name     String            @unique
+  articles ArticleCategory[]
+
+  @@map("categories")
+}
+
+// Tabel penghubung many-to-many antara Article dan Category
+model ArticleCategory {
+  article    Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleId  String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId String
+
+  @@id([articleId, categoryId])
+  @@map("article_categories")
+}
+
+model Article {
+  id            String            @id @default(cuid())
+  title         String
+  abstract      String
+  keywords      String[]
+  year          Int
+  status        ArticleStatus     @default(PENDING)
+  rejectedNote  String?
+
+  fileUrl       String
+  coverUrl      String?
+
+  downloadCount Int               @default(0)
+
+  author        User              @relation(fields: [authorId], references: [id])
+  authorId      String
+
+  faculty       Faculty           @relation(fields: [facultyId], references: [id])
+  facultyId     String
+
+  categories    ArticleCategory[]
+
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  publishedAt   DateTime?
+
+  @@map("articles")
+}
