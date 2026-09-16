@@ -1,0 +1,41 @@
+# <tipe>(<scope>): <judul singkat, present tense, maks 50 karakter>
+#
+# Kenapa perubahan ini dibuat & apa yang berubah (opsional, wrap di 72 karakter):
+#
+#
+#
+# Referensi (opsional): issue/task terkait, mis. "Refs #12"
+#
+# ====================== PANDUAN ======================
+#
+# TIPE (wajib, pilih salah satu):
+#   feat     - fitur/halaman baru
+#   fix      - perbaikan bug
+#   style    - perubahan tampilan/CSS tanpa ubah logic (mis. warna, spacing)
+#   refactor - ubah struktur kode tanpa ubah perilaku (mis. pindah logic ke service layer)
+#   docs     - perubahan dokumentasi (PRD.md, CLAUDE.md, README.md)
+#   chore    - setup project, dependency, config, tooling
+#   test     - menambah/memperbaiki test
+#
+# SCOPE (opsional tapi disarankan, area mana yang terdampak):
+#   public     - halaman publik (homepage, search, detail artikel)
+#   dosen      - dashboard & halaman dosen
+#   admin      - dashboard & halaman admin
+#   auth       - login, NextAuth, session
+#   db         - schema.prisma, migrasi
+#   api        - route handler di app/api
+#   ui         - komponen reusable di components/
+#   deploy     - konfigurasi deployment (Vercel, env, dst)
+#
+# CONTOH:
+#   feat(public): tambah halaman homepage dengan hero dan carousel
+#   feat(dosen): tambah dashboard ringkasan dengan data dummy
+#   fix(auth): perbaiki validasi password saat login
+#   style(public): sesuaikan warna cover artikel per fakultas
+#   refactor(api): pindahkan logic verifikasi ke articleService
+#   docs: tambahkan bagian desain UI ke PRD.md
+#   chore: setup project Next.js + Prisma + Tailwind
+#
+# Baris pertama: present tense ("tambah", bukan "menambahkan" atau "ditambahkan"),
+# tanpa titik di akhir, huruf kecil semua kecuali nama proper.
+# =======================================================
