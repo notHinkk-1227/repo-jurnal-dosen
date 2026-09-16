@@ -111,6 +111,7 @@ export type PublicArticle = {
   year: number;
   facultyName: string;
   categoryName: string;
+  keywords: string[];
   downloadCount: number;
   publishedAt: string;
   coverTheme: CoverThemeKey;
@@ -156,6 +157,7 @@ export const dummyFeaturedArticle: PublicArticle = {
   year: 2026,
   facultyName: "Fakultas Ekonomi dan Bisnis",
   categoryName: "Ekonomi Digital",
+  keywords: ["digitalisasi", "UMKM", "produktivitas", "ekonomi digital"],
   downloadCount: 512,
   publishedAt: "2026-08-15",
   coverTheme: "ekonomi",
@@ -170,6 +172,7 @@ export const dummyLatestArticles: PublicArticle[] = [
     year: 2025,
     facultyName: "Fakultas Teknik",
     categoryName: "Teknik Elektro",
+    keywords: ["energi terbarukan", "panel surya", "efisiensi"],
     downloadCount: 342,
     publishedAt: "2025-11-10",
     coverTheme: "teknik",
@@ -182,6 +185,7 @@ export const dummyLatestArticles: PublicArticle[] = [
     year: 2025,
     facultyName: "Fakultas Ekonomi",
     categoryName: "Ekonomi Moneter",
+    keywords: ["inflasi", "time series", "ekonomi regional"],
     downloadCount: 198,
     publishedAt: "2025-10-22",
     coverTheme: "ekonomi",
@@ -194,6 +198,7 @@ export const dummyLatestArticles: PublicArticle[] = [
     year: 2024,
     facultyName: "Fakultas Kedokteran",
     categoryName: "Kesehatan Masyarakat",
+    keywords: ["stunting", "kesehatan pesisir", "intervensi multisektor"],
     downloadCount: 276,
     publishedAt: "2024-09-05",
     coverTheme: "kedokteran",
@@ -206,6 +211,7 @@ export const dummyLatestArticles: PublicArticle[] = [
     year: 2025,
     facultyName: "Fakultas Pendidikan",
     categoryName: "Teknologi Pendidikan",
+    keywords: ["etika AI", "kecerdasan buatan", "pendidikan tinggi"],
     downloadCount: 164,
     publishedAt: "2025-07-18",
     coverTheme: "pendidikan",
@@ -218,6 +224,7 @@ export const dummyLatestArticles: PublicArticle[] = [
     year: 2024,
     facultyName: "Fakultas Hukum",
     categoryName: "Hukum Lingkungan",
+    keywords: ["hukum lingkungan", "otonomi daerah", "pesisir"],
     downloadCount: 845,
     publishedAt: "2024-04-12",
     coverTheme: "hukum",
@@ -233,6 +240,7 @@ export const dummyMostDownloaded: PublicArticle[] = [
     year: 2023,
     facultyName: "Fakultas Ilmu Sosial",
     categoryName: "Metodologi Penelitian",
+    keywords: ["metodologi", "riset kualitatif", "ilmu sosial"],
     downloadCount: 1204,
     publishedAt: "2023-03-01",
     coverTheme: "pendidikan",
@@ -245,6 +253,7 @@ export const dummyMostDownloaded: PublicArticle[] = [
     year: 2024,
     facultyName: "Fakultas Teknik",
     categoryName: "Ilmu Komputer",
+    keywords: ["machine learning", "AI", "ilmu komputer"],
     downloadCount: 980,
     publishedAt: "2024-02-14",
     coverTheme: "komputer",
@@ -257,8 +266,28 @@ export const dummyMostDownloaded: PublicArticle[] = [
     year: 2024,
     facultyName: "Fakultas Hukum",
     categoryName: "Hukum Lingkungan",
+    keywords: ["hukum lingkungan", "kebijakan publik", "regulasi"],
     downloadCount: 845,
     publishedAt: "2024-04-12",
     coverTheme: "hukum",
   },
 ];
+
+// Gabungan semua artikel publik — dipakai untuk halaman detail & pencarian,
+// supaya cukup satu sumber data yang di-lookup berdasarkan id.
+export const dummyAllPublicArticles: PublicArticle[] = [
+  dummyFeaturedArticle,
+  ...dummyLatestArticles,
+  ...dummyMostDownloaded,
+];
+
+export function getPublicArticleById(id: string): PublicArticle | undefined {
+  return dummyAllPublicArticles.find((article) => article.id === id);
+}
+
+// Artikel lain dari fakultas yang sama, untuk section "Artikel terkait" di halaman detail.
+export function getRelatedArticles(current: PublicArticle, take = 5): PublicArticle[] {
+  return dummyAllPublicArticles
+    .filter((a) => a.id !== current.id && a.facultyName === current.facultyName)
+    .slice(0, take);
+}
