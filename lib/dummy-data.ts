@@ -291,3 +291,24 @@ export function getRelatedArticles(current: PublicArticle, take = 5): PublicArti
     .filter((a) => a.id !== current.id && a.facultyName === current.facultyName)
     .slice(0, take);
 }
+
+// Pencarian sederhana di sisi memory untuk dummy data.
+// Nanti diganti articleService.searchPublicArticles({ query, facultyId, categoryId, page })
+// yang query ke database lewat articleRepository.findPublished (lihat lib/repositories/articleRepository.ts —
+// logika filter di sana sudah didesain agar polanya sama persis dengan fungsi ini).
+export function searchPublicArticles(params: { query?: string; facultyName?: string }): PublicArticle[] {
+  const { query, facultyName } = params;
+  const normalizedQuery = query?.trim().toLowerCase();
+
+  return dummyAllPublicArticles.filter((article) => {
+    const matchesFaculty = !facultyName || article.facultyName.includes(facultyName);
+
+    const matchesQuery =
+      !normalizedQuery ||
+      article.title.toLowerCase().includes(normalizedQuery) ||
+      article.authorName.toLowerCase().includes(normalizedQuery) ||
+      article.keywords.some((k) => k.toLowerCase().includes(normalizedQuery));
+
+    return matchesFaculty && matchesQuery;
+  });
+}

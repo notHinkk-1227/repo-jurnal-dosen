@@ -1,6 +1,6 @@
 import { FeaturedArticleHero } from "@/components/public/FeaturedArticleHero";
 import { PublicSearchBar } from "@/components/public/PublicSearchBar";
-import { FacultyFilterChips } from "@/components/public/FacultyFilterChips";
+import { SearchFacultyFilter } from "@/components/public/SearchFacultyFilter";
 import { ArticleCarouselRow } from "@/components/public/ArticleCarouselRow";
 import { dummyFeaturedArticle, dummyLatestArticles, dummyMostDownloaded } from "@/lib/dummy-data";
 
@@ -16,7 +16,8 @@ export default function HomePage() {
       </div>
 
       <div className="mt-4">
-        <FacultyFilterChips />
+        {/* Klik fakultas di homepage langsung membawa ke halaman /search dengan filter itu aktif */}
+        <SearchFacultyFilter />
       </div>
 
       <div className="mt-10 flex flex-col gap-10">
