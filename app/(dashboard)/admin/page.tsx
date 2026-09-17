@@ -37,7 +37,7 @@ export default async function AdminQueuePage({
       </div>
 
       <div className="mt-8">
-        <VerificationQueueList initialArticles={dummyPendingQueue} />
+        <VerificationQueueList articles={dummyPendingQueue} />
       </div>
     </div>
   );

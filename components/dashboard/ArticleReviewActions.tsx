@@ -1,28 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Check, X } from "lucide-react";
+import { approveArticleAction, rejectArticleAction } from "@/app/(dashboard)/admin/actions";
 
-// TODO: ganti simulasi ini dengan PATCH /api/articles/[id] yang memanggil
-// articleService.reviewArticle(id, status, note) begitu backend aktif.
 export function ArticleReviewActions({ articleId }: { articleId: string }) {
-  const router = useRouter();
   const [isRejecting, setIsRejecting] = useState(false);
   const [note, setNote] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleApprove() {
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    router.push("/admin?reviewed=approved");
+    await approveArticleAction(articleId);
   }
 
   async function handleConfirmReject() {
     if (!note.trim()) return;
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    router.push("/admin?reviewed=rejected");
+    await rejectArticleAction(articleId, note.trim());
   }
 
   if (isRejecting) {

@@ -402,3 +402,19 @@ export const dummyPendingQueue: QueuedArticle[] = [
 export function getQueuedArticleById(id: string): QueuedArticle | undefined {
   return dummyPendingQueue.find((article) => article.id === id);
 }
+
+// Mutasi langsung ke array dummyPendingQueue (bukan sekadar filter di state
+// komponen) supaya perubahan "nyambung" saat pindah halaman (dari halaman
+// detail balik ke daftar antrean) tanpa perlu backend sungguhan dulu.
+// Ini murni simulasi untuk tahap development — begitu backend aktif, ganti
+// dengan articleService.reviewArticle(id, status, note) yang menulis ke
+// database via articleRepository (lihat lib/services/articleService.ts).
+export function approveQueuedArticle(id: string) {
+  const index = dummyPendingQueue.findIndex((article) => article.id === id);
+  if (index !== -1) dummyPendingQueue.splice(index, 1);
+}
+
+export function rejectQueuedArticle(id: string) {
+  const index = dummyPendingQueue.findIndex((article) => article.id === id);
+  if (index !== -1) dummyPendingQueue.splice(index, 1);
+}
