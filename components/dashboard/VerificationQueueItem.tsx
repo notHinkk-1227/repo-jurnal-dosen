@@ -33,11 +33,11 @@ export function VerificationQueueItem({
   return (
     <div className="rounded-lg border border-border bg-surface p-5">
       <div className="flex gap-5">
-        <div className="w-[90px] shrink-0">
+        <div className="w-[150px] shrink-0">
           <ArticleCover title={article.title} theme={article.coverTheme} size="sm" />
         </div>
 
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1 py-1">
           <h3 className="font-serif text-lg leading-snug text-ink">{article.title}</h3>
           <p className="mt-1.5 text-sm text-ink-soft">
             {article.authorName} · {article.facultyName} · {article.year}
