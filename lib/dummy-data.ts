@@ -398,3 +398,7 @@ export const dummyPendingQueue: QueuedArticle[] = [
     coverTheme: "pendidikan",
   },
 ];
+
+export function getQueuedArticleById(id: string): QueuedArticle | undefined {
+  return dummyPendingQueue.find((article) => article.id === id);
+}

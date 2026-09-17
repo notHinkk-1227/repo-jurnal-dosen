@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Check, X } from "lucide-react";
 import { ArticleCover } from "@/components/public/ArticleCover";
 import type { QueuedArticle } from "@/lib/dummy-data";
@@ -38,7 +39,12 @@ export function VerificationQueueItem({
         </div>
 
         <div className="min-w-0 flex-1 py-1">
-          <h3 className="font-serif text-lg leading-snug text-ink">{article.title}</h3>
+          <Link
+            href={`/admin/${article.id}`}
+            className="font-serif text-lg leading-snug text-ink hover:underline"
+          >
+            {article.title}
+          </Link>
           <p className="mt-1.5 text-sm text-ink-soft">
             {article.authorName} · {article.facultyName} · {article.year}
           </p>
@@ -94,23 +100,32 @@ export function VerificationQueueItem({
           </div>
         </div>
       ) : (
-        <div className="mt-4 flex justify-end gap-2 border-t border-border pt-4">
-          <button
-            type="button"
-            onClick={() => setIsRejecting(true)}
-            className="inline-flex items-center gap-1.5 rounded-md border border-border px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:bg-paper"
+        <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
+          <Link
+            href={`/admin/${article.id}`}
+            className="text-sm font-medium text-ink-soft underline-offset-2 hover:text-ink hover:underline"
           >
-            <X className="h-4 w-4" strokeWidth={1.75} />
-            Tolak
-          </button>
-          <button
-            type="button"
-            onClick={() => onApprove(article.id)}
-            className="inline-flex items-center gap-1.5 rounded-md bg-status-published px-3.5 py-2 text-sm font-medium text-paper transition-opacity hover:opacity-90"
-          >
-            <Check className="h-4 w-4" strokeWidth={1.75} />
-            Setujui
-          </button>
+            Tinjau lengkap & pratinjau PDF
+          </Link>
+
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => setIsRejecting(true)}
+              className="inline-flex items-center gap-1.5 rounded-md border border-border px-3.5 py-2 text-sm font-medium text-ink transition-colors hover:bg-paper"
+            >
+              <X className="h-4 w-4" strokeWidth={1.75} />
+              Tolak
+            </button>
+            <button
+              type="button"
+              onClick={() => onApprove(article.id)}
+              className="inline-flex items-center gap-1.5 rounded-md bg-status-published px-3.5 py-2 text-sm font-medium text-paper transition-opacity hover:opacity-90"
+            >
+              <Check className="h-4 w-4" strokeWidth={1.75} />
+              Setujui
+            </button>
+          </div>
         </div>
       )}
     </div>
