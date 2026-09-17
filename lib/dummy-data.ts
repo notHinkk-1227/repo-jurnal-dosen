@@ -27,6 +27,13 @@ export const dummyCurrentDosen = {
   facultyName: "Fakultas Teknik",
 };
 
+// Admin yang sedang login — sama seperti dummyCurrentDosen, dummy sementara.
+export const dummyCurrentAdmin = {
+  id: "usr_admin_1",
+  name: "Rini Kartika",
+  email: "rini.kartika@kampus.ac.id",
+};
+
 export const dummyArticles: DummyArticle[] = [
   {
     id: "art_1",
@@ -324,3 +331,70 @@ export function searchPublicArticles(params: { query?: string; facultyName?: str
     return matchesFaculty && matchesQuery;
   });
 }
+
+// ---------------------------------------------------------------------------
+// Data untuk halaman ADMIN (antrean verifikasi).
+// ---------------------------------------------------------------------------
+
+export type QueuedArticle = {
+  id: string;
+  title: string;
+  abstract: string;
+  authorName: string;
+  facultyName: string;
+  year: number;
+  keywords: string[];
+  submittedAt: string;
+  coverTheme: CoverThemeKey;
+};
+
+export const dummyPendingQueue: QueuedArticle[] = [
+  {
+    id: "art_q_1",
+    title: "Optimalisasi Jaringan Sensor Nirkabel untuk Pemantauan Kualitas Udara",
+    abstract:
+      "Studi ini mengusulkan skema penempatan sensor nirkabel yang optimal untuk pemantauan kualitas udara perkotaan menggunakan algoritma optimasi berbasis graf.",
+    authorName: "Dr. Andi Wijaya",
+    facultyName: "Fakultas Teknik",
+    year: 2026,
+    keywords: ["sensor nirkabel", "kualitas udara", "IoT"],
+    submittedAt: "2026-09-10",
+    coverTheme: "teknik",
+  },
+  {
+    id: "art_q_2",
+    title: "Pengaruh Literasi Keuangan terhadap Perilaku Menabung Generasi Z",
+    abstract:
+      "Penelitian ini menganalisis hubungan antara tingkat literasi keuangan dan perilaku menabung pada generasi Z di perkotaan menggunakan pendekatan survei kuantitatif.",
+    authorName: "Dr. Farah Amelia",
+    facultyName: "Fakultas Ekonomi",
+    year: 2026,
+    keywords: ["literasi keuangan", "generasi Z", "perilaku menabung"],
+    submittedAt: "2026-09-12",
+    coverTheme: "ekonomi",
+  },
+  {
+    id: "art_q_3",
+    title: "Efektivitas Telemedicine dalam Layanan Kesehatan Primer di Daerah Terpencil",
+    abstract:
+      "Studi kasus mengenai efektivitas implementasi telemedicine untuk meningkatkan akses layanan kesehatan primer di wilayah dengan keterbatasan fasilitas medis.",
+    authorName: "dr. Bayu Prasetyo",
+    facultyName: "Fakultas Kedokteran",
+    year: 2025,
+    keywords: ["telemedicine", "kesehatan primer", "daerah terpencil"],
+    submittedAt: "2026-09-08",
+    coverTheme: "kedokteran",
+  },
+  {
+    id: "art_q_4",
+    title: "Implementasi Kurikulum Merdeka Belajar pada Sekolah Menengah Kejuruan",
+    abstract:
+      "Penelitian ini mengevaluasi tantangan dan strategi implementasi Kurikulum Merdeka Belajar di sekolah menengah kejuruan berdasarkan perspektif guru dan siswa.",
+    authorName: "Dr. Nadia Putri",
+    facultyName: "Fakultas Pendidikan",
+    year: 2026,
+    keywords: ["kurikulum merdeka", "SMK", "evaluasi pendidikan"],
+    submittedAt: "2026-09-14",
+    coverTheme: "pendidikan",
+  },
+];
