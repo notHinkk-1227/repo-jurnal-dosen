@@ -1,15 +1,28 @@
 import Link from "next/link";
+import { CheckCircle2 } from "lucide-react";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { ArticleTable } from "@/components/dashboard/ArticleTable";
 import { dummyArticles, dummyCurrentDosen, getDummyStats } from "@/lib/dummy-data";
 
 // TODO: ganti dummyArticles dengan articleService.getArticlesByAuthor(session.user.id)
 // begitu NextAuth session dan database aktif.
-export default function DosenDashboardPage() {
+export default async function DosenDashboardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ submitted?: string }>;
+}) {
+  const { submitted } = await searchParams;
   const stats = getDummyStats(dummyArticles);
 
   return (
     <div>
+      {submitted ? (
+        <div className="mb-6 flex items-center gap-2.5 rounded-lg bg-status-published-soft px-4 py-3 text-sm text-status-published">
+          <CheckCircle2 className="h-4 w-4 shrink-0" strokeWidth={1.75} />
+          Artikel berhasil dikirim dan sedang menunggu verifikasi admin.
+        </div>
+      ) : null}
+
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm text-ink-soft">Selamat datang kembali,</p>

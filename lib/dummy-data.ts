@@ -148,6 +148,18 @@ export const dummyFaculties = [
   { id: "fak_hukum", name: "Hukum" },
 ];
 
+export const dummyCategories = [
+  { id: "cat_1", name: "Teknik Elektro" },
+  { id: "cat_2", name: "Teknik Sipil" },
+  { id: "cat_3", name: "Ilmu Komputer" },
+  { id: "cat_4", name: "Ekonomi Digital" },
+  { id: "cat_5", name: "Ekonomi Moneter" },
+  { id: "cat_6", name: "Kesehatan Masyarakat" },
+  { id: "cat_7", name: "Teknologi Pendidikan" },
+  { id: "cat_8", name: "Hukum Lingkungan" },
+  { id: "cat_9", name: "Metodologi Penelitian" },
+];
+
 export const dummyFeaturedArticle: PublicArticle = {
   id: "art_pub_1",
   title: "Dampak Digitalisasi terhadap Produktivitas UMKM di Jawa Barat",
