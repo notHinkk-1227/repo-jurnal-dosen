@@ -3,24 +3,102 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Palet akademik-institusional: kertas hangat + aksen kuning-brass ala
+     stempel/ijazah universitas. Sengaja bukan cream+terracotta atau
+     near-black+neon generik. */
+  --color-ink: #1c2b39;
+  --color-ink-soft: #4a5a68;
+  --color-paper: #f6f4ee;
+  --color-surface: #ffffff;
+  --color-brass: #a9793a;
+  --color-brass-soft: #f1e6d4;
+  --color-border: #e3ddd0;
+
+  --color-status-published: #3f6d4e;
+  --color-status-published-soft: #e4ede7;
+  --color-status-pending: #a3760f;
+  --color-status-pending-soft: #f5ecd9;
+  --color-status-rejected: #a14545;
+  --color-status-rejected-soft: #f4e6e6;
+
+  /* Warna cover artikel per bidang keilmuan — dipakai TemplateCoverStrategy.
+     Sengaja warna flat (bukan gradient) sesuai arah desain formal-akademik. */
+  --color-cover-teknik: #2f5d8a;
+  --color-cover-teknik-fg: #eaf1f8;
+  --color-cover-ekonomi: #2f6d4a;
+  --color-cover-ekonomi-fg: #eaf3ec;
+  --color-cover-kedokteran: #8a3a4a;
+  --color-cover-kedokteran-fg: #f8ebee;
+  --color-cover-pendidikan: #7a5a2f;
+  --color-cover-pendidikan-fg: #f6efe6;
+  --color-cover-hukum: #5a4a7a;
+  --color-cover-hukum-fg: #efecf5;
+  --color-cover-komputer: #3a6d6d;
+  --color-cover-komputer-fg: #eaf3f3;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-paper: var(--color-paper);
+  --color-surface: var(--color-surface);
+  --color-brass: var(--color-brass);
+  --color-brass-soft: var(--color-brass-soft);
+  --color-border: var(--color-border);
+
+  --color-status-published: var(--color-status-published);
+  --color-status-published-soft: var(--color-status-published-soft);
+  --color-status-pending: var(--color-status-pending);
+  --color-status-pending-soft: var(--color-status-pending-soft);
+  --color-status-rejected: var(--color-status-rejected);
+  --color-status-rejected-soft: var(--color-status-rejected-soft);
+
+  --color-cover-teknik: var(--color-cover-teknik);
+  --color-cover-teknik-fg: var(--color-cover-teknik-fg);
+  --color-cover-ekonomi: var(--color-cover-ekonomi);
+  --color-cover-ekonomi-fg: var(--color-cover-ekonomi-fg);
+  --color-cover-kedokteran: var(--color-cover-kedokteran);
+  --color-cover-kedokteran-fg: var(--color-cover-kedokteran-fg);
+  --color-cover-pendidikan: var(--color-cover-pendidikan);
+  --color-cover-pendidikan-fg: var(--color-cover-pendidikan-fg);
+  --color-cover-hukum: var(--color-cover-hukum);
+  --color-cover-hukum-fg: var(--color-cover-hukum-fg);
+  --color-cover-komputer: var(--color-cover-komputer);
+  --color-cover-komputer-fg: var(--color-cover-komputer-fg);
+
+  --font-serif: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", serif;
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Kolase cover login: animasi masuk bertahap + hover interaktif */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Kolase cover login: scroll vertikal tanpa henti, berlawanan arah per kolom.
+   Konten kolom di-render 2x lalu digeser -50% supaya loop-nya mulus (seamless). */
+@keyframes scroll-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
 }
