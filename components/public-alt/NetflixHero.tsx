@@ -1,5 +1,6 @@
 import { FileText, Info } from "lucide-react";
 import { NETFLIX_COVER_THEMES } from "@/components/public-alt/NetflixCoverThemes";
+import { stickerBackgroundImage } from "@/components/public-alt/stickerBackground";
 import type { PublicArticle } from "@/lib/dummy-data";
 
 function formatYear(iso: string) {
@@ -10,14 +11,23 @@ export function NetflixHero({ article }: { article: PublicArticle }) {
   const backdrop = NETFLIX_COVER_THEMES[article.coverTheme].bg;
 
   return (
-    <div className="relative h-[360px] sm:h-[420px]" style={{ backgroundColor: backdrop }}>
+    <div
+      className="relative h-[360px] sm:h-[420px]"
+      style={{
+        backgroundColor: backdrop,
+        backgroundImage: stickerBackgroundImage,
+        backgroundRepeat: "repeat",
+        backgroundSize: "260px 260px",
+      }}
+    >
       {/* Gradasi dari warna backdrop ke gelap, menutupi seluruh tinggi hero —
           supaya tidak ada bagian atas yang tampil sebagai warna solid polos
-          tanpa konten (itu bug yang sebelumnya terlihat sebagai "bar hijau"). */}
+          tanpa konten, dan transisinya menyambung mulus ke area di bawahnya
+          yang juga memakai pola stiker yang sama. */}
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.15) 75%, rgba(0,0,0,0) 100%)`,
+          background: `linear-gradient(to top, rgba(20,20,20,1) 0%, rgba(20,20,20,0.75) 40%, rgba(20,20,20,0.25) 75%, rgba(20,20,20,0) 100%)`,
         }}
       />
 

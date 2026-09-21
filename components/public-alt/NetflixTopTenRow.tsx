@@ -18,7 +18,7 @@ export function NetflixTopTenRow({ articles }: { articles: PublicArticle[] }) {
             >
               {i + 1}
             </span>
-            <Link href={`/articles/${article.id}`} className="w-[130px] shrink-0">
+            <Link href={`/articles/${article.id}`} className="w-[150px] shrink-0">
               <NetflixArticleCover title={article.title} theme={article.coverTheme} />
             </Link>
           </div>

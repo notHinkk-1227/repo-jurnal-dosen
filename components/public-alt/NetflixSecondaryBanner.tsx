@@ -1,5 +1,6 @@
 import { FileText, Bookmark } from "lucide-react";
 import { NETFLIX_COVER_THEMES } from "@/components/public-alt/NetflixCoverThemes";
+import { stickerBackgroundImage } from "@/components/public-alt/stickerBackground";
 import type { PublicArticle } from "@/lib/dummy-data";
 
 export function NetflixSecondaryBanner({ article }: { article: PublicArticle }) {
@@ -8,12 +9,17 @@ export function NetflixSecondaryBanner({ article }: { article: PublicArticle }) 
   return (
     <div
       className="relative h-[300px] overflow-hidden rounded-lg sm:h-[340px]"
-      style={{ backgroundColor: backdrop }}
+      style={{
+        backgroundColor: backdrop,
+        backgroundImage: stickerBackgroundImage,
+        backgroundRepeat: "repeat",
+        backgroundSize: "260px 260px",
+      }}
     >
       <div
         className="absolute inset-0"
         style={{
-          background: `linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0) 100%)`,
+          background: `linear-gradient(to top, rgba(20,20,20,0.95) 0%, rgba(20,20,20,0.6) 40%, rgba(20,20,20,0.15) 75%, rgba(20,20,20,0) 100%)`,
         }}
       />
 

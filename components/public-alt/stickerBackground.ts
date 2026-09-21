@@ -37,11 +37,17 @@ function toDataUri(svg: string) {
   return `url("data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}")`;
 }
 
+// Nilai mentah CSS background-image-nya, diekspor terpisah supaya komponen
+// lain (Hero, banner kedua) bisa menumpuknya DI ATAS warna solid mereka
+// sendiri — supaya motif stiker terasa menyambung ke seluruh halaman,
+// bukan cuma muncul tiba-tiba begitu area hero berakhir.
+export const stickerBackgroundImage = toDataUri(STICKER_TILE_SVG);
+
 // Style siap-pakai: spread ke elemen pembungkus halaman.
 // Ukuran tile 260px — perbesar/perkecil angka ini kalau ingin motifnya
 // terasa lebih renggang/rapat.
 export const stickerBackgroundStyle: React.CSSProperties = {
-  backgroundImage: toDataUri(STICKER_TILE_SVG),
+  backgroundImage: stickerBackgroundImage,
   backgroundRepeat: "repeat",
   backgroundSize: "260px 260px",
 };

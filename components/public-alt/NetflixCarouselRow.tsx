@@ -7,7 +7,7 @@ function NetflixCoverCard({ article }: { article: PublicArticle }) {
   const badge = article.year >= 2026 ? "Baru" : article.downloadCount > 500 ? "Populer" : null;
 
   return (
-    <div className="group relative w-[150px] shrink-0">
+    <div className="group relative w-[175px] shrink-0">
       <Link href={`/articles/${article.id}`} className="relative block">
         <NetflixArticleCover title={article.title} theme={article.coverTheme} />
         {badge ? (
@@ -26,7 +26,7 @@ function NetflixCoverCard({ article }: { article: PublicArticle }) {
       </div>
 
       {/* Hover card: muncul saat cursor di atas poster, murni CSS (group-hover) */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 flex h-[180px] flex-col justify-end rounded-md bg-black/90 p-3 opacity-0 transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
+      <div className="pointer-events-none absolute inset-x-0 top-0 flex h-[215px] flex-col justify-end rounded-md bg-black/90 p-3 opacity-0 transition-opacity duration-200 group-hover:pointer-events-auto group-hover:opacity-100">
         <p className="line-clamp-2 text-xs font-medium leading-snug text-white">{article.title}</p>
         <p className="mt-1 line-clamp-2 text-[11px] leading-snug text-white/55">{article.abstract}</p>
         <div className="mt-2 flex gap-1.5">

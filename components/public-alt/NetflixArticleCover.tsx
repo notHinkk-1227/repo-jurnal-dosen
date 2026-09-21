@@ -22,7 +22,7 @@ export function NetflixArticleCover({
 }) {
   const config = NETFLIX_COVER_THEMES[theme];
   const Icon = ICONS[config.icon];
-  const heightClass = size === "hero" ? "h-[260px]" : "h-[180px]";
+  const heightClass = size === "hero" ? "h-[280px]" : "h-[215px]";
 
   return (
     <div
