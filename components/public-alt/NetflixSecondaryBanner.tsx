@@ -1,25 +1,38 @@
+import Image from "next/image";
 import { FileText, Bookmark } from "lucide-react";
 import { NETFLIX_COVER_THEMES } from "@/components/public-alt/NetflixCoverThemes";
-import { stickerBackgroundImage } from "@/components/public-alt/stickerBackground";
+import { getHeroImage } from "@/lib/cover-images";
 import type { PublicArticle } from "@/lib/dummy-data";
 
 export function NetflixSecondaryBanner({ article }: { article: PublicArticle }) {
   const backdrop = NETFLIX_COVER_THEMES[article.coverTheme].bg;
+  const hero = getHeroImage(article.coverTheme);
 
   return (
     <div
       className="relative h-[300px] overflow-hidden rounded-lg sm:h-[340px]"
-      style={{
-        backgroundColor: backdrop,
-        backgroundImage: stickerBackgroundImage,
-        backgroundRepeat: "repeat",
-        backgroundSize: "260px 260px",
-      }}
+      style={{ backgroundColor: backdrop }}
     >
+      <Image
+        src={hero.src}
+        alt=""
+        fill
+        sizes="(max-width: 1152px) 100vw, 1152px"
+        unoptimized
+        className="object-cover"
+        style={{ imageRendering: "pixelated", objectPosition: hero.position }}
+      />
+
       <div
         className="absolute inset-0"
         style={{
           background: `linear-gradient(to top, rgba(20,20,20,0.95) 0%, rgba(20,20,20,0.6) 40%, rgba(20,20,20,0.15) 75%, rgba(20,20,20,0) 100%)`,
+        }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(to right, rgba(20,20,20,0.6) 0%, rgba(20,20,20,0.25) 50%, rgba(20,20,20,0) 80%)`,
         }}
       />
 

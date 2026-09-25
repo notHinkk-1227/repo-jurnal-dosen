@@ -1,6 +1,7 @@
+import Image from "next/image";
 import { FileText, Info } from "lucide-react";
 import { NETFLIX_COVER_THEMES } from "@/components/public-alt/NetflixCoverThemes";
-import { stickerBackgroundImage } from "@/components/public-alt/stickerBackground";
+import { getHeroImage } from "@/lib/cover-images";
 import type { PublicArticle } from "@/lib/dummy-data";
 
 function formatYear(iso: string) {
@@ -9,25 +10,37 @@ function formatYear(iso: string) {
 
 export function NetflixHero({ article }: { article: PublicArticle }) {
   const backdrop = NETFLIX_COVER_THEMES[article.coverTheme].bg;
+  const hero = getHeroImage(article.coverTheme);
 
   return (
     <div
-      className="relative h-[360px] sm:h-[420px]"
-      style={{
-        backgroundColor: backdrop,
-        backgroundImage: stickerBackgroundImage,
-        backgroundRepeat: "repeat",
-        backgroundSize: "260px 260px",
-      }}
+      className="relative h-[360px] overflow-hidden sm:h-[420px]"
+      style={{ backgroundColor: backdrop }}
     >
-      {/* Gradasi dari warna backdrop ke gelap, menutupi seluruh tinggi hero —
-          supaya tidak ada bagian atas yang tampil sebagai warna solid polos
-          tanpa konten, dan transisinya menyambung mulus ke area di bawahnya
-          yang juga memakai pola stiker yang sama. */}
+      {/* Gambar pixel art resolusi asli (kecil) yang diperbesar — pixelated menjaga
+          tepi piksel tetap tajam, bukan blur. Warna tema jadi latar cadangan. */}
+      <Image
+        src={hero.src}
+        alt=""
+        fill
+        sizes="100vw"
+        unoptimized
+        className="object-cover"
+        style={{ imageRendering: "pixelated", objectPosition: hero.position }}
+      />
+
+      {/* Gradasi bawah: menyambung mulus ke latar halaman (#141414). */}
       <div
         className="absolute inset-0"
         style={{
           background: `linear-gradient(to top, rgba(20,20,20,1) 0%, rgba(20,20,20,0.75) 40%, rgba(20,20,20,0.25) 75%, rgba(20,20,20,0) 100%)`,
+        }}
+      />
+      {/* Gradasi kiri: teks judul ada di kiri-bawah, ini menjaga kontrasnya di atas gambar yang ramai. */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(to right, rgba(20,20,20,0.7) 0%, rgba(20,20,20,0.3) 45%, rgba(20,20,20,0) 75%)`,
         }}
       />
 
