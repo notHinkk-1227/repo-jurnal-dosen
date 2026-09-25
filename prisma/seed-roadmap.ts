@@ -4,7 +4,7 @@
 // Catatan: kalau project-mu memakai Prisma client dengan output custom / driver
 // adapter, ganti dua baris import+instansiasi di bawah dengan instance dari lib/db.ts.
 import { PrismaClient } from "@prisma/client";
-import { themes, streams, pkmFocusAreas, years, researchTopics, pkmTopics } from "./data/roadmap";
+import { themes, streams, pkmFocusAreas, years, researchTopics, pkmTopics } from "./roadmap";
 
 const prisma = new PrismaClient();
 
